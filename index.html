@@ -1,142 +1,85 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ Xem Anime</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #444;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .search-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .search-container input {
-            padding: 10px;
-            width: 80%;
-            max-width: 500px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .anime-list {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-        .anime-item {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-            text-align: center;
-            background-color: #fff;
-        }
-        .anime-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .anime-item button {
-            margin-top: 10px;
-            padding: 5px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .anime-item button:hover {
-            background-color: #4cae4c;
-        }
-        .video-container {
-            display: none;  /* Ẩn video ban đầu */
-            justify-content: center;
-            margin-top: 20px;
-        }
-        iframe {
-            border: none;
-            border-radius: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimeVsub</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    .anime-item {
+      margin-bottom: 30px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .anime-item img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .anime-item h3 {
+      margin: 10px 0;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #video-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 360px;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>Trang Web Xem Anime</h1>
-        <p>Chọn bộ anime yêu thích và chọn tập để xem!</p>
-    </header>
+  <h1>AnimeVsub</h1>
 
-    <!-- Tính năng tìm kiếm -->
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Tìm anime..." onkeyup="searchAnime()">
-    </div>
+  <!-- Anime Conan -->
+  <div class="anime-item">
+    <img src="https://drive.google.com/uc?export=view&id=10WBHQVsFhclW0db794TMJhQloeFh2KqR" alt="Conan">
+    <h3>Thám tử lừng danh Conan</h3>
+    <button onclick="showVideo('conan1')">Tập 1</button>
+    <button onclick="showVideo('conan2')">Tập 2</button>
+    <button onclick="showVideo('conan3')">Tập 3</button>
+  </div>
 
-    <!-- Danh sách Anime -->
-    <div class="anime-list" id="animeList">
-        <div class="anime-item">
-            <img src="https://drive.google.com/uc?export=view&id=10WBHQVsFhclW0db794TMJhQloeFh2KqR " alt="Thám Tử Lừng Danh Conan">
-            <h3>Thám Tử Lừng Danh Conan</h3>
-            <button onclick="showVideo('conan')">Xem</button>
-        </div>
-    </div>
+  <div id="video-container"></div>
 
-    <!-- Video Container -->
-    <div class="video-container" id="conan">
-        <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
-    </div>
-
-    <script>
-        function searchAnime() {
-            var input, filter, list, items, title, i, txtValue;
-            input = document.getElementById('searchInput');
-            filter = input.value.toLowerCase();
-            list = document.getElementById('animeList');
-            items = list.getElementsByClassName('anime-item');
-            
-            for (i = 0; i < items.length; i++) {
-                title = items[i].getElementsByTagName("h3")[0];
-                txtValue = title.textContent || title.innerText;
-                if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                    items[i].style.display = "";
-                } else {
-                    items[i].style.display = "none";
-                }
-            }
-        }
-
-        function showVideo(animeId) {
-            // Ẩn tất cả các video
-            var videos = document.querySelectorAll('.video-container');
-            videos.forEach(function(video) {
-                video.style.display = 'none';
-            });
-
-            // Hiển thị video của anime đã chọn
-            var selectedVideo = document.getElementById(animeId);
-            selectedVideo.style.display = 'block';
-
-            // Cuộn xuống video
-            window.scrollTo({
-                top: selectedVideo.offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    </script>
+  <script>
+    function showVideo(id) {
+      const videos = {
+        'conan1': 'https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview',
+        'conan2': 'https://drive.google.com/file/d/1FAKEID2/preview',
+        'conan3': 'https://drive.google.com/file/d/1FAKEID3/preview'
+      };
+      if (videos[id]) {
+        document.getElementById("video-container").innerHTML = `
+          <iframe src="${videos[id]}" allowfullscreen></iframe>
+        `;
+        window.scrollTo({ top: document.getElementById("video-container").offsetTop, behavior: 'smooth' });
+      }
+    }
+  </script>
 
 </body>
 </html>
