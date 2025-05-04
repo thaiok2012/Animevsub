@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ Xem Anime</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #444;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .search-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .search-container input {
+            padding: 10px;
+            width: 80%;
+            max-width: 500px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .anime-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .anime-item {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+            background-color: #fff;
+        }
+        .anime-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .anime-item button {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .anime-item button:hover {
+            background-color: #4cae4c;
+        }
+        .video-container {
+            display: none;  /* Ẩn video ban đầu */
+            justify-content: center;
+            margin-top: 20px;
+        }
+        iframe {
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Trang Web Xem Anime</h1>
+        <p>Chọn bộ anime yêu thích và chọn tập để xem!</p>
+    </header>
+
+    <!-- Tính năng tìm kiếm -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Tìm anime..." onkeyup="searchAnime()">
+    </div>
+
+    <!-- Danh sách Anime -->
+    <div class="anime-list" id="animeList">
+        <div class="anime-item">
+            <img src="anime1.jpg" alt="Anime 1">
+            <h3>Anime 1</h3>
+            <button onclick="showVideo('anime1')">Xem</button>
+        </div>
+        <div class="anime-item">
+            <img src="anime2.jpg" alt="Anime 2">
+            <h3>Anime 2</h3>
+            <button onclick="showVideo('anime2')">Xem</button>
+        </div>
+        <div class="anime-item">
+            <img src="anime3.jpg" alt="Anime 3">
+            <h3>Anime 3</h3>
+            <button onclick="showVideo('anime3')">Xem</button>
+        </div>
+    </div>
+
+    <!-- Video Container -->
+    <div class="video-container" id="anime1">
+        <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
+    </div>
+    <div class="video-container" id="anime2">
+        <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
+    </div>
+    <div class="video-container" id="anime3">
+        <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function searchAnime() {
+            var input, filter, list, items, title, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toLowerCase();
+            list = document.getElementById('animeList');
+            items = list.getElementsByClassName('anime-item');
+            
+            for (i = 0; i < items.length; i++) {
+                title = items[i].getElementsByTagName("h3")[0];
+                txtValue = title.textContent || title.innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function showVideo(animeId) {
+            // Ẩn tất cả các video
+            var videos = document.querySelectorAll('.video-container');
+            videos.forEach(function(video) {
+                video.style.display = 'none';
+            });
+
+            // Hiển thị video của anime đã chọn
+            var selectedVideo = document.getElementById(animeId);
+            selectedVideo.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
