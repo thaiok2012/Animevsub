@@ -1,47 +1,107 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AnimeVsub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimeVsub - Trang Chủ</title>
   <style>
     body {
-      background-color: #111;
-      color: white;
       font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #333;
+      color: white;
       text-align: center;
       padding: 20px;
     }
-    .anime {
-      display: inline-block;
-      margin: 20px;
-      border: 1px solid #333;
-      border-radius: 10px;
-      overflow: hidden;
-      width: 200px;
-      background-color: #222;
-      text-decoration: none;
-      color: white;
+    .search-container {
+      text-align: center;
+      margin: 20px 0;
     }
-    .anime img {
-      width: 100%;
-      height: 270px;
-      object-fit: cover;
+    .search-container input {
+      padding: 10px;
+      width: 80%;
+      max-width: 500px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-    .anime h3 {
+    .anime-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .anime-item {
+      background: white;
       margin: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .anime-item:hover {
+      transform: scale(1.03);
+    }
+    .anime-item img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .anime-item h3 {
+      margin: 10px 0 0 0;
     }
   </style>
 </head>
 <body>
-  <h1>AnimeVsub</h1>
-  <a class="anime" href="onepiece.html">
-    <img src="https://i.imgur.com/CUFPXoy.jpg" alt="One Piece" />
-    <h3>One Piece</h3>
-  </a>
-  <a class="anime" href="conan.html">
-    <img src="https://i.imgur.com/2nOTzUn.jpg" alt="Conan" />
-    <h3>Thám tử lừng danh Conan</h3>
-  </a>
+  <header>
+    <h1>AnimeVsub</h1>
+    <p>Chọn một bộ anime để xem</p>
+  </header>
+
+  <!-- Thanh tìm kiếm -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Tìm anime..." onkeyup="searchAnime()">
+  </div>
+
+  <div class="anime-list" id="animeList">
+    <div class="anime-item">
+      <a href="onepiece.html">
+        <img src="onepiece.jpg" alt="One Piece">
+        <h3>One Piece</h3>
+      </a>
+    </div>
+    <div class="anime-item">
+      <a href="conan.html">
+        <img src="conan.jpg" alt="Conan">
+        <h3>Thám Tử Lừng Danh Conan</h3>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function searchAnime() {
+      var input, filter, list, items, title, i, txtValue;
+      input = document.getElementById('searchInput');
+      filter = input.value.toLowerCase();
+      list = document.getElementById('animeList');
+      items = list.getElementsByClassName('anime-item');
+
+      for (i = 0; i < items.length; i++) {
+        title = items[i].getElementsByTagName("h3")[0];
+        txtValue = title.textContent || title.innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+          items[i].style.display = "";
+        } else {
+          items[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 </html>
