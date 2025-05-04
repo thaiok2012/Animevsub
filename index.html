@@ -2,31 +2,87 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>AnimeVsub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Vietsub</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background-color: #f5f5f5; }
-    h1 { text-align: center; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 15px 0; }
-    a {
-      display: block;
-      background: #007bff;
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+    h1 {
       text-align: center;
-      text-decoration: none;
+    }
+    #searchInput {
+      display: block;
+      margin: 0 auto 20px auto;
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+    }
+    .anime-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .anime {
+      background-color: white;
+      border-radius: 10px;
+      padding: 10px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .anime img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .anime-title {
+      margin-top: 10px;
       font-weight: bold;
     }
-    a:hover { background: #0056b3; }
+    a {
+      text-decoration: none;
+      color: black;
+    }
   </style>
 </head>
 <body>
-  <h1>AnimeVsub</h1>
-  <ul>
-    <li><a href="one-piece.html">One Piece</a></li>
-    <li><a href="conan.html">Thám tử lừng danh Conan</a></li>
-  </ul>
+  <h1>Anime Vietsub</h1>
+
+  <input type="text" id="searchInput" placeholder="Tìm kiếm anime...">
+
+  <div class="anime-list" id="animeList">
+    <div class="anime">
+      <a href="conan.html">
+        <img src="https://drive.google.com/uc?export=view&id=10WBHQVsFhclW0db794TMJhQloeFh2KqR" alt="Conan">
+        <div class="anime-title">Thám tử lừng danh Conan</div>
+      </a>
+    </div>
+
+    <!-- Bạn có thể thêm các anime khác theo mẫu dưới đây -->
+    <!--
+    <div class="anime">
+      <a href="onepiece.html">
+        <img src="URL_ANH_ONEPIECE" alt="One Piece">
+        <div class="anime-title">One Piece</div>
+      </a>
+    </div>
+    -->
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const animeList = document.getElementById('animeList');
+    const animeItems = animeList.getElementsByClassName('anime');
+
+    searchInput.addEventListener('input', function() {
+      const keyword = this.value.toLowerCase();
+      for (let anime of animeItems) {
+        const title = anime.innerText.toLowerCase();
+        anime.style.display = title.includes(keyword) ? 'block' : 'none';
+      }
+    });
+  </script>
 </body>
 </html>
