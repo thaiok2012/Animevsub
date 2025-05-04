@@ -1,203 +1,149 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ Xem Anime</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #444;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .search-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .search-container input {
-            padding: 10px;
-            width: 80%;
-            max-width: 500px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .anime-list {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-        .anime-item {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-            text-align: center;
-            background-color: #fff;
-        }
-        .anime-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .anime-item button {
-            margin-top: 10px;
-            padding: 5px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .anime-item button:hover {
-            background-color: #4cae4c;
-        }
-        .video-container {
-            display: none;  /* Ẩn video ban đầu */
-            justify-content: center;
-            margin-top: 20px;
-        }
-        iframe {
-            border: none;
-            border-radius: 10px;
-        }
-        .episodes-container {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-        .episode-button {
-            padding: 5px;
-            background-color: #f39c12;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .episode-button:hover {
-            background-color: #e67e22;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AnimeVsub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #222;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      color: #ff4757;
+      margin: 0;
+    }
+    .anime-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .anime-card {
+      background-color: #222;
+      border: 1px solid #333;
+      border-radius: 10px;
+      margin: 10px;
+      width: 200px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .anime-card img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+    }
+    .episodes {
+      display: none;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .episodes h2 {
+      color: #ffa502;
+    }
+    .episode-btn {
+      background-color: #ff6348;
+      border: none;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .video-container {
+      display: none;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    iframe {
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 720px;
+      height: 405px;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>Trang Web Xem Anime</h1>
-        <p>Chọn bộ anime yêu thích và chọn tập để xem!</p>
-    </header>
+<header>
+  <h1>AnimeVsub</h1>
+</header>
 
-    <!-- Tính năng tìm kiếm -->
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Tìm anime..." onkeyup="searchAnime()">
-    </div>
+<div class="anime-list">
+  <div class="anime-card" onclick="showEpisodes('onepiece')">
+    <img src="https://i.imgur.com/CUFPXoy.jpg" alt="One Piece" />
+    <h3>One Piece</h3>
+  </div>
+  <div class="anime-card" onclick="showEpisodes('conan')">
+    <img src="https://i.imgur.com/2nOTzUn.jpg" alt="Conan" />
+    <h3>Thám tử lừng danh Conan</h3>
+  </div>
+</div>
 
-    <!-- Danh sách Anime -->
-    <div class="anime-list" id="animeList">
-        <div class="anime-item">
-            <img src="anime1.jpg" alt="One Piece">
-            <h3>One Piece</h3>
-            <button onclick="showEpisodes('onePiece')">Chọn Tập</button>
-        </div>
-        <div class="anime-item">
-            <img src="anime2.jpg" alt="Conan">
-            <h3>Thám tử lừng danh Conan</h3>
-            <button onclick="showEpisodes('conan')">Chọn Tập</button>
-        </div>
-    </div>
+<!-- Episodes for One Piece -->
+<div class="episodes" id="onepiece-episodes">
+  <h2>Chọn tập One Piece</h2>
+  <button class="episode-btn" onclick="showVideo('onepiece1')">Tập 1</button>
+  <button class="episode-btn" onclick="showVideo('onepiece2')">Tập 2</button>
+  <button class="episode-btn" onclick="showVideo('onepiece3')">Tập 3</button>
+</div>
 
-    <!-- Tập của One Piece -->
-    <div class="episodes-container" id="onePieceEpisodes" style="display: none;">
-        <button class="episode-button" onclick="showVideo('onePiece', 1)">Tập 1</button>
-        <button class="episode-button" onclick="showVideo('onePiece', 2)">Tập 2</button>
-        <button class="episode-button" onclick="showVideo('onePiece', 3)">Tập 3</button>
-    </div>
+<!-- Episodes for Conan -->
+<div class="episodes" id="conan-episodes">
+  <h2>Chọn tập Conan</h2>
+  <button class="episode-btn" onclick="showVideo('conan1')">Tập 1</button>
+  <button class="episode-btn" onclick="showVideo('conan2')">Tập 2</button>
+  <button class="episode-btn" onclick="showVideo('conan3')">Tập 3</button>
+</div>
 
-    <!-- Tập của Conan -->
-    <div class="episodes-container" id="conanEpisodes" style="display: none;">
-        <button class="episode-button" onclick="showVideo('conan', 1)">Tập 1</button>
-        <button class="episode-button" onclick="showVideo('conan', 2)">Tập 2</button>
-        <button class="episode-button" onclick="showVideo('conan', 3)">Tập 3</button>
-    </div>
+<!-- Video containers -->
+<div class="video-container" id="onepiece1">
+  <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" allowfullscreen></iframe>
+</div>
+<div class="video-container" id="onepiece2">
+  <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" allowfullscreen></iframe>
+</div>
+<div class="video-container" id="onepiece3">
+  <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" allowfullscreen></iframe>
+</div>
 
-    <!-- Video Container -->
-    <div class="video-container" id="onePiece1">
-        <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
-    </div>
-    <div class="video-container" id="onePiece2">
-        <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
-    </div>
-    <div class="video-container" id="onePiece3">
-        <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
-    </div>
-    <div class="video-container" id="conan1">
-        <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
-    </div>
-    <div class="video-container" id="conan2">
-        <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
-    </div>
-    <div class="video-container" id="conan3">
-        <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" width="640" height="360" allow="autoplay" allowfullscreen></iframe>
-    </div>
+<div class="video-container" id="conan1">
+  <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" allowfullscreen></iframe>
+</div>
+<div class="video-container" id="conan2">
+  <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" allowfullscreen></iframe>
+</div>
+<div class="video-container" id="conan3">
+  <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" allowfullscreen></iframe>
+</div>
 
-    <script>
-        function searchAnime() {
-            var input, filter, list, items, title, i, txtValue;
-            input = document.getElementById('searchInput');
-            filter = input.value.toLowerCase();
-            list = document.getElementById('animeList');
-            items = list.getElementsByClassName('anime-item');
-            
-            for (i = 0; i < items.length; i++) {
-                title = items[i].getElementsByTagName("h3")[0];
-                txtValue = title.textContent || title.innerText;
-                if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                    items[i].style.display = "";
-                } else {
-                    items[i].style.display = "none";
-                }
-            }
-        }
+<script>
+  function showEpisodes(anime) {
+    document.querySelectorAll('.episodes').forEach(e => e.style.display = 'none');
+    document.getElementById(anime + '-episodes').style.display = 'block';
+    scrollToElement(anime + '-episodes');
+  }
 
-        function showEpisodes(animeId) {
-            var onePieceEpisodes = document.getElementById('onePieceEpisodes');
-            var conanEpisodes = document.getElementById('conanEpisodes');
-            
-            // Ẩn tất cả các tập của cả 2 anime
-            onePieceEpisodes.style.display = 'none';
-            conanEpisodes.style.display = 'none';
+  function showVideo(videoId) {
+    document.querySelectorAll('.video-container').forEach(v => v.style.display = 'none');
+    const selected = document.getElementById(videoId);
+    selected.style.display = 'flex';
+    scrollToElement(videoId);
+  }
 
-            // Hiển thị tập của anime đã chọn
-            if (animeId === 'onePiece') {
-                onePieceEpisodes.style.display = 'block';
-            } else if (animeId === 'conan') {
-                conanEpisodes.style.display = 'block';
-            }
-        }
-
-        function showVideo(animeId, episode) {
-            // Ẩn tất cả các video
-            var videos = document.querySelectorAll('.video-container');
-            videos.forEach(function(video) {
-                video.style.display = 'none';
-            });
-
-            // Hiển thị video của tập đã chọn
-            var selectedVideo = document.getElementById(animeId + episode);
-            selectedVideo.style.display = 'block';
-            window.scrollTo({ top: selectedVideo.offsetTop, behavior: 'smooth' });  // Cuộn xuống video
-        }
-    </script>
+  function scrollToElement(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
