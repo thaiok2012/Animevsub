@@ -1,149 +1,107 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AnimeVsub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimeVsub - Trang Chủ</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
+      background: #f2f2f2;
       margin: 0;
       padding: 0;
     }
     header {
-      background-color: #222;
-      padding: 20px;
+      background: #333;
+      color: white;
       text-align: center;
-    }
-    header h1 {
-      color: #ff4757;
-      margin: 0;
-    }
-    .anime-list {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
       padding: 20px;
     }
-    .anime-card {
-      background-color: #222;
-      border: 1px solid #333;
-      border-radius: 10px;
-      margin: 10px;
-      width: 200px;
-      text-align: center;
-      cursor: pointer;
-    }
-    .anime-card img {
-      width: 100%;
-      height: 270px;
-      object-fit: cover;
-    }
-    .episodes {
-      display: none;
+    .search-container {
       text-align: center;
       margin: 20px 0;
     }
-    .episodes h2 {
-      color: #ffa502;
-    }
-    .episode-btn {
-      background-color: #ff6348;
-      border: none;
-      color: white;
+    .search-container input {
       padding: 10px;
-      margin: 5px;
+      width: 80%;
+      max-width: 500px;
+      font-size: 16px;
       border-radius: 5px;
-      cursor: pointer;
+      border: 1px solid #ccc;
     }
-    .video-container {
-      display: none;
+    .anime-list {
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      margin-top: 20px;
+      padding: 20px;
     }
-    iframe {
-      border: none;
-      border-radius: 10px;
+    .anime-item {
+      background: white;
+      margin: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .anime-item:hover {
+      transform: scale(1.03);
+    }
+    .anime-item img {
       width: 100%;
-      max-width: 720px;
-      height: 405px;
+      border-radius: 8px;
+    }
+    .anime-item h3 {
+      margin: 10px 0 0 0;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>AnimeVsub</h1>
+    <p>Chọn một bộ anime để xem</p>
+  </header>
 
-<header>
-  <h1>AnimeVsub</h1>
-</header>
-
-<div class="anime-list">
-  <div class="anime-card" onclick="showEpisodes('onepiece')">
-    <img src="https://i.imgur.com/CUFPXoy.jpg" alt="One Piece" />
-    <h3>One Piece</h3>
+  <!-- Thanh tìm kiếm -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Tìm anime..." onkeyup="searchAnime()">
   </div>
-  <div class="anime-card" onclick="showEpisodes('conan')">
-    <img src="https://i.imgur.com/2nOTzUn.jpg" alt="Conan" />
-    <h3>Thám tử lừng danh Conan</h3>
+
+  <div class="anime-list" id="animeList">
+    <div class="anime-item">
+      <a href="onepiece.html">
+        <img src="onepiece.jpg" alt="One Piece">
+        <h3>One Piece</h3>
+      </a>
+    </div>
+    <div class="anime-item">
+      <a href="conan.html">
+        <img src="conan.jpg" alt="Conan">
+        <h3>Thám Tử Lừng Danh Conan</h3>
+      </a>
+    </div>
   </div>
-</div>
 
-<!-- Episodes for One Piece -->
-<div class="episodes" id="onepiece-episodes">
-  <h2>Chọn tập One Piece</h2>
-  <button class="episode-btn" onclick="showVideo('onepiece1')">Tập 1</button>
-  <button class="episode-btn" onclick="showVideo('onepiece2')">Tập 2</button>
-  <button class="episode-btn" onclick="showVideo('onepiece3')">Tập 3</button>
-</div>
+  <script>
+    function searchAnime() {
+      var input, filter, list, items, title, i, txtValue;
+      input = document.getElementById('searchInput');
+      filter = input.value.toLowerCase();
+      list = document.getElementById('animeList');
+      items = list.getElementsByClassName('anime-item');
 
-<!-- Episodes for Conan -->
-<div class="episodes" id="conan-episodes">
-  <h2>Chọn tập Conan</h2>
-  <button class="episode-btn" onclick="showVideo('conan1')">Tập 1</button>
-  <button class="episode-btn" onclick="showVideo('conan2')">Tập 2</button>
-  <button class="episode-btn" onclick="showVideo('conan3')">Tập 3</button>
-</div>
-
-<!-- Video containers -->
-<div class="video-container" id="onepiece1">
-  <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" allowfullscreen></iframe>
-</div>
-<div class="video-container" id="onepiece2">
-  <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" allowfullscreen></iframe>
-</div>
-<div class="video-container" id="onepiece3">
-  <iframe src="https://drive.google.com/file/d/1-03AscIdyUtOu5433WGgeXM0AXpaA144/preview" allowfullscreen></iframe>
-</div>
-
-<div class="video-container" id="conan1">
-  <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" allowfullscreen></iframe>
-</div>
-<div class="video-container" id="conan2">
-  <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" allowfullscreen></iframe>
-</div>
-<div class="video-container" id="conan3">
-  <iframe src="https://drive.google.com/file/d/1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ/preview" allowfullscreen></iframe>
-</div>
-
-<script>
-  function showEpisodes(anime) {
-    document.querySelectorAll('.episodes').forEach(e => e.style.display = 'none');
-    document.getElementById(anime + '-episodes').style.display = 'block';
-    scrollToElement(anime + '-episodes');
-  }
-
-  function showVideo(videoId) {
-    document.querySelectorAll('.video-container').forEach(v => v.style.display = 'none');
-    const selected = document.getElementById(videoId);
-    selected.style.display = 'flex';
-    scrollToElement(videoId);
-  }
-
-  function scrollToElement(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-  }
-</script>
-
+      for (i = 0; i < items.length; i++) {
+        title = items[i].getElementsByTagName("h3")[0];
+        txtValue = title.textContent || title.innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+          items[i].style.display = "";
+        } else {
+          items[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 </html>
