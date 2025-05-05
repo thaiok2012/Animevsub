@@ -11,57 +11,45 @@
       margin: 0;
       padding: 0;
     }
-
     h1 {
-      margin-top: 20px;
+      margin: 20px 0 10px;
     }
-
     img.cover {
-      width: 200px;
+      display: block;
+      margin: 0 auto 10px;
+      max-width: 200px;
+      height: auto;
       border-radius: 10px;
-      margin-bottom: 10px;
+      z-index: 0;
+      position: relative;
     }
-
-    .button-group {
-      margin: 15px 0;
-    }
-
     button {
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      border-radius: 6px;
-      border: none;
-      background-color: #007BFF;
-      color: white;
     }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
     #video-container {
       margin-top: 20px;
-      padding: 0 10px;
+      z-index: 1;
+      position: relative;
     }
-
     iframe {
-      width: 100%;
-      max-width: 100%;
-      height: calc(100vw * 9 / 16); /* Video tỷ lệ 16:9 */
+      width: 90%;
+      height: 60vh; /* chiếm 60% chiều cao màn hình */
       border: none;
-      border-radius: 12px;
+      z-index: 2;
+      position: relative;
     }
   </style>
 </head>
 <body>
   <h1>
-    <img src="https://i.imgur.com/Rwg0sF8.jpeg " alt="Conan" class="cover"><br>
+    <img src="https://i.imgur.com/Rwg0sF8.jpeg" alt="Conan" class="cover"><br>
     Thám tử lừng danh Conan
   </h1>
 
-  <div class="button-group">
+  <div>
     <button onclick="loadVideo('1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ')">Tập 1</button>
     <button onclick="loadVideo('ID_TAP2')">Tập 2</button>
     <button onclick="loadVideo('ID_TAP3')">Tập 3</button>
