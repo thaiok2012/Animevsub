@@ -2,48 +2,64 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thám tử lừng danh Conan</title>
   <style>
     body {
       font-family: sans-serif;
+      text-align: center;
       background-color: #f5f5f5;
       margin: 0;
       padding: 0;
-      text-align: center;
     }
+
     h1 {
       margin-top: 20px;
     }
+
     img.cover {
       width: 200px;
       border-radius: 10px;
-      margin-top: 20px;
+      margin-bottom: 10px;
     }
+
     .button-group {
-      margin: 20px;
+      margin: 15px 0;
     }
+
     button {
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
+      border-radius: 6px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
     }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
     #video-container {
       margin-top: 20px;
+      padding: 0 10px;
     }
+
     iframe {
-      width: 95%;
-      height: 70vh;
+      width: 100%;
+      max-width: 100%;
+      height: calc(100vw * 9 / 16); /* Video tỷ lệ 16:9 */
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
-
-  <h1>Thám tử lừng danh Conan</h1>
-  <img src="https://drive.google.com/uc?export=view&id=10WBHQVsFhclW0db794TMJhQloeFh2KqR" alt="Conan" class="cover">
+  <h1>
+    <img src="https://drive.google.com/uc?export=view&id=10WBHQVsFhclW0db794TMJhQloeFh2KqR" alt="Conan" class="cover"><br>
+    Thám tử lừng danh Conan
+  </h1>
 
   <div class="button-group">
     <button onclick="loadVideo('1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ')">Tập 1</button>
@@ -62,6 +78,5 @@
       container.scrollIntoView({ behavior: "smooth" });
     }
   </script>
-
 </body>
 </html>
