@@ -4,24 +4,26 @@
   <meta charset="UTF-8">
   <title>Thám tử lừng danh Conan</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: sans-serif;
-      text-align: center;
-      background-color: #f5f5f5;
       margin: 0;
       padding: 0;
+      background-color: #f5f5f5;
+      text-align: center;
     }
     h1 {
-      margin: 20px 0 10px;
+      margin-top: 20px;
     }
-    img.cover {
-      display: block;
-      margin: 0 auto 10px;
-      max-width: 200px;
-      height: auto;
+    .cover {
+      width: 200px;
       border-radius: 10px;
-      z-index: 0;
-      position: relative;
+      margin-bottom: 10px;
+    }
+    .buttons {
+      margin: 20px 0;
     }
     button {
       margin: 5px;
@@ -31,25 +33,22 @@
     }
     #video-container {
       margin-top: 20px;
-      z-index: 1;
-      position: relative;
     }
     iframe {
-      width: 90%;
-      height: 60vh; /* chiếm 60% chiều cao màn hình */
+      width: 90vw;
+      height: 60vh;
       border: none;
-      z-index: 2;
+      z-index: 1;
       position: relative;
+      pointer-events: auto;
     }
   </style>
 </head>
 <body>
-  <h1>
-    <img src="https://i.imgur.com/Rwg0sF8.jpeg" alt="Conan" class="cover"><br>
-    Thám tử lừng danh Conan
-  </h1>
+  <h1>Thám tử lừng danh Conan</h1>
+  <img class="cover" src="https://i.imgur.com/Rwg0sF8.jpeg" alt="Conan">
 
-  <div>
+  <div class="buttons">
     <button onclick="loadVideo('1-qqm_5n3P9RnxfPPF3h3Fzji9wBLYOAQ')">Tập 1</button>
     <button onclick="loadVideo('ID_TAP2')">Tập 2</button>
     <button onclick="loadVideo('ID_TAP3')">Tập 3</button>
