@@ -2,12 +2,12 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>AnimeVsub Clone</title>
+  <title>AnimeVsub - Trang chủ</title>
   <style>
     body {
-      font-family: Arial;
-      background: #111;
+      background-color: #111;
       color: #fff;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
     }
@@ -31,12 +31,12 @@
       gap: 20px;
     }
     .anime {
-      width: 150px;
+      width: 160px;
       text-align: center;
     }
     .anime img {
       width: 100%;
-      height: 210px;
+      height: 230px;
       border-radius: 10px;
       object-fit: cover;
     }
@@ -44,33 +44,33 @@
       margin-top: 8px;
       font-weight: bold;
       font-size: 14px;
+      color: #00f0ff;
     }
     a {
-      color: white;
       text-decoration: none;
+      color: inherit;
     }
   </style>
 </head>
 <body>
 
-  <h1>Danh sách Anime</h1>
+  <h1>Danh Sách Anime</h1>
 
   <input type="text" id="search" placeholder="Tìm anime...">
 
   <div class="anime-container" id="animeList">
     <div class="anime">
-      <a href="anime/conan.html">
-        <img src="https://i.imgur.com/Rwg0sF8.jpeg " alt="Conan">
-        <div class="anime-title">Thám Tử Lừng Danh Conan</div>
-      </a>
-    </div>
-    <div class="anime">
       <a href="anime/onepunchman.html">
-        <img src="https://i.imgur.com/Xkj3DHd.png " alt="One Punch Man">
+        <img src="https://i.imgur.com/Xkj3DHd.png" alt="One Punch Man">
         <div class="anime-title">One Punch Man</div>
       </a>
     </div>
-    <!-- Thêm anime mới ở đây -->
+    <div class="anime">
+      <a href="anime/conan.html">
+        <img src="https://i.imgur.com/Rwg0sF8.jpeg" alt="Conan">
+        <div class="anime-title">Thám Tử Lừng Danh Conan</div>
+      </a>
+    </div>
   </div>
 
   <script>
