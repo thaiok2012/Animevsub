@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Flappy Bird TV</title>
+  <style>
+    body { margin: 0; background: #000; }
+    canvas { background: skyblue; display: block; margin: auto; }
+    #settings {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+      font-size: 20px;
+      z-index: 10;
+    }
+    #settings button {
+      font-size: 18px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="settings">
+  <p>Cài đặt Game</p>
+  <button onclick="closeSettings()">Đóng</button>
+</div>
+
+<canvas id="gameCanvas" width="480" height="640"></canvas>
+
+<script>
+// Load hình ảnh
+const birdImg = new Image();
+birdImg.src = "https://i.imgur.com/fxkYipN.png"; // hình chim
+
+const pipeTopImg = new Image();
+pipeTopImg.src = "https://i.imgur.com/QoBoBzS.png"; // ống trên
+
+const pipeBottomImg = new Image();
+pipeBottomImg.src = "https://i.imgur.com/4rG7Z4f.png"; // ống dưới
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+let birdY = 200, birdVelocity = 0, gravity = 0.5, flapPower = -8;
+let pipes = [{ x: 480, y: Math.random() * 200 + 100 }];
+let pipeGap = 150, pipeSpeed = 2;
+let gameOver = false;
+
+// Vẽ game
+function draw() {
+  if (gameOver) return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Chim
+  birdVelocity += gravity;
+  birdY += birdVelocity;
+  ctx.drawImage(birdImg, 100 - 20, birdY - 20, 40, 40);
+
+  // Ống
+  for (let pipe of pipes) {
+    pipe.x -= pipeSpeed;
+    ctx.drawImage(pipeTopImg, pipe.x, pipe.y - pipeTopImg.height, 50, pipeTopImg.height);
+    ctx.drawImage(pipeBottomImg, pipe.x, pipe.y + pipeGap, 50, pipeBottomImg.height);
+
+    // Va chạm
+    if (
+      100 + 20 > pipe.x && 100 - 20 < pipe.x + 50 &&
+      (birdY - 20 < pipe.y || birdY + 20 > pipe.y + pipeGap)
+    ) {
+      showGameOver();
+    }
+  }
+
+  // Thêm ống mới
+  if (pipes[pipes.length - 1].x < 250) {
+    pipes.push({ x: 480, y: Math.random() * 200 + 100 });
+  }
+
+  // Chim chết
+  if (birdY > canvas.height || birdY < 0) {
+    showGameOver();
+  }
+
+  requestAnimationFrame(draw);
+}
+
+function showGameOver() {
+  gameOver = true;
+  setTimeout(() => {
+    alert("Game Over!");
+    document.location.reload();
+  }, 100);
+}
+
+// Phím điều khiển
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Digit9") {
+    birdVelocity = flapPower;
+  }
+
+  if (e.code === "Digit0") {
+    document.getElementById("settings").style.display = "block";
+  }
+});
+
+function closeSettings() {
+  document.getElementById("settings").style.display = "none";
+}
+
+// Đảm bảo hình đã tải xong mới chạy game
+let imagesLoaded = 0;
+[birdImg, pipeTopImg, pipeBottomImg].forEach(img => {
+  img.onload = () => {
+    imagesLoaded++;
+    if (imagesLoaded === 3) draw();
+  };
+});
+</script>
+
+</body>
+</html>
