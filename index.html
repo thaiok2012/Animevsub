@@ -2,89 +2,106 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>AnimeVsub - Trang chủ</title>
+  <title>AnimeVsub Clone</title>
   <style>
-    body {
-      background-color: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
+    body { font-family: Arial; background: #111; color: #fff; margin: 0; padding: 0; }
+    h1, h2 { text-align: center; }
+    .search-box { text-align: center; margin: 20px; }
+    input[type="text"] {
+      padding: 10px; width: 80%; max-width: 400px;
+      border: none; border-radius: 5px;
     }
-    h1 {
-      text-align: center;
+    .anime-list {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 20px; padding: 20px;
     }
-    #search {
-      display: block;
-      margin: 20px auto;
-      padding: 10px;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
+    .anime-item {
+      width: 150px; cursor: pointer; text-align: center;
     }
-    .anime-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    .anime-item img {
+      width: 100%; border-radius: 10px;
     }
-    .anime {
-      width: 160px;
-      text-align: center;
-    }
-    .anime img {
-      width: 100%;
-      height: 230px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-    .anime-title {
-      margin-top: 8px;
-      font-weight: bold;
-      font-size: 14px;
-      color: #00f0ff;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
+    iframe { display: block; margin: 20px auto; border: none; }
+    button {
+      display: block; margin: 20px auto;
+      padding: 10px 20px; border: none;
+      background: #ff4444; color: white; border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <h1>Danh Sách Anime</h1>
-
-  <input type="text" id="search" placeholder="Tìm anime...">
-
-  <div class="anime-container" id="animeList">
-    <div class="anime">
-      <a href="anime/onepunchman.html">
-        <img src="https://i.imgur.com/Xkj3DHd.png" alt="One Punch Man">
-        <div class="anime-title">One Punch Man</div>
-      </a>
+<div id="indexPage">
+  <h1>Trang Chủ Anime</h1>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Tìm kiếm anime..." onkeyup="filterAnime()">
+  </div>
+  <div class="anime-list" id="animeList">
+    <div class="anime-item" onclick="goToConan()">
+      <img src="https://i.imgur.com/Rwg0sF8.jpeg">
+      <p>Conan</p>
     </div>
-    <div class="anime">
-      <a href="anime/conan.html">
-        <img src="https://i.imgur.com/Rwg0sF8.jpeg" alt="Conan">
-        <div class="anime-title">Thám Tử Lừng Danh Conan</div>
-      </a>
+    <div class="anime-item" onclick="goToOPM()">
+      <img src="https://i.imgur.com/Xkj3DHd.png">
+      <p>One Punch Man</p>
+    </div>
+    <div class="anime-item" onclick="goToMovieConan()">
+      <img src="https://i.imgur.com/Rwg0sF8.jpeg">
+      <p>Movie Conan</p>
     </div>
   </div>
+</div>
 
-  <script>
-    const searchInput = document.getElementById('search');
-    const animeList = document.getElementById('animeList');
-    searchInput.addEventListener('input', function () {
-      const keyword = this.value.toLowerCase();
-      const animes = animeList.querySelectorAll('.anime');
-      animes.forEach(anime => {
-        const title = anime.innerText.toLowerCase();
-        anime.style.display = title.includes(keyword) ? 'block' : 'none';
-      });
-    });
-  </script>
+<!-- Trang chi tiết Conan -->
+<div id="conanPage" style="display:none">
+  <h2>Conan - Tập 1</h2>
+  <iframe src="https://filemoon.sx/e/53czropd78q7" width="100%" height="400" allowfullscreen></iframe>
+  <button onclick="goHome()">Quay lại</button>
+</div>
+
+<!-- Trang chi tiết One Punch Man -->
+<div id="opmPage" style="display:none">
+  <h2>One Punch Man - Tập 1</h2>
+  <iframe src="https://filemoon.sx/e/32mu77sw7cv7" width="100%" height="400" allowfullscreen></iframe>
+  <button onclick="goHome()">Quay lại</button>
+</div>
+
+<!-- Trang chi tiết Movie Conan -->
+<div id="movieConanPage" style="display:none">
+  <h2>Movie Conan</h2>
+  <iframe src="https://filemoon.sx/e/53czropd78q7" width="100%" height="400" allowfullscreen></iframe>
+  <button onclick="goHome()">Quay lại</button>
+</div>
+
+<script>
+function goToConan() {
+  document.getElementById("indexPage").style.display = "none";
+  document.getElementById("conanPage").style.display = "block";
+}
+function goToOPM() {
+  document.getElementById("indexPage").style.display = "none";
+  document.getElementById("opmPage").style.display = "block";
+}
+function goToMovieConan() {
+  document.getElementById("indexPage").style.display = "none";
+  document.getElementById("movieConanPage").style.display = "block";
+}
+function goHome() {
+  document.getElementById("indexPage").style.display = "block";
+  document.getElementById("conanPage").style.display = "none";
+  document.getElementById("opmPage").style.display = "none";
+  document.getElementById("movieConanPage").style.display = "none";
+}
+function filterAnime() {
+  const input = document.getElementById("search").value.toLowerCase();
+  const items = document.querySelectorAll(".anime-item");
+  items.forEach(item => {
+    const name = item.innerText.toLowerCase();
+    item.style.display = name.includes(input) ? "block" : "none";
+  });
+}
+</script>
 
 </body>
 </html>
