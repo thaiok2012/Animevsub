@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Conan - movie 27</title> <style>
+<style>
     body {
       background-color: #111;
       color: white;
@@ -16,13 +11,14 @@
       margin-bottom: 20px;
     }
     
+    /* Khung chứa video giúp video luôn ở tỷ lệ 16:9 */
     .video-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* Tỷ lệ 16:9 (9/16 = 0.5625) */
+      padding-bottom: 56.25%; /* Tỷ lệ 16:9 */
       height: 0;
       margin: 0 auto;
-      max-width: 900px; /* Giới hạn kích thước tối đa (tùy chọn) */
+      max-width: 900px;
       border-radius: 10px;
       overflow: hidden;
     }
@@ -35,13 +31,14 @@
       height: 100%;
       border: none;
     }
-  </style>
-</head>
-<body>
-  <h1>Conan - movie 27</h1> <div class="video-container">
-    <iframe src="https://player.phimapi.com/player/?url=https://s6.kkphimplayer6.com/20250827/BY3PctlO/index.m3u8"
-            allowfullscreen></iframe>
-  </div>
-</body>
-</html>
+</style>
 
+<h1>Conan - movie 27</h1>
+
+<div class="video-container">
+    <iframe 
+        src="https://player.phimapi.com/player/?url=https://s6.kkphimplayer6.com/20250827/BY3PctlO/index.m3u8"
+        allowfullscreen
+        referrerpolicy="no-referrer"> 
+        </iframe>
+</div>
